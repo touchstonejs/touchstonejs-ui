@@ -27,9 +27,7 @@
   ],
   "scripts": {
     "build": "gulp clean:lib && gulp build:lib",
-    "build:site": "gulp clean:site && NODE_ENV=productin gulp build:site",
     "lint": "happiness",
-    "start": "gulp site",
     "test": "npm run lint",
     "watch": "gulp watch:lib"
   },

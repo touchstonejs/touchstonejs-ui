@@ -11,18 +11,6 @@ var gulp = require('gulp');
 var less = require('gulp-less');
 var source = require('vinyl-source-stream');
 
-const SITE_BUILD_PATH = 'site/__build';
-const SITE_FILES = [
-	'.gitignore',
-	'404.html',
-	'CNAME',
-	'favicon.ico',
-	'images/*',
-	'index.html',
-	'logo.svg',
-	'logo-mark.svg'
-];
-
 // Build/Clean/Watch lib
 gulp.task('build:lib', function () {
 	return gulp.src('src/**/*')
@@ -33,48 +21,6 @@ gulp.task('build:lib', function () {
 gulp.task('clean:lib', function (done) { del(['lib'], done); });
 gulp.task('watch:lib', ['build:lib'], function () {
 	gulp.watch('src/**/*', ['build:lib']);
-});
-
-// Site
-gulp.task('clean:site', function (done) { del(['site/__dist'], done); });
-
-gulp.task('build:site:files', function () {
-	return gulp.src([
-			SITE_FILES
-		], {
-			cwd: 'site',
-			base: 'site'
-		})
-		.pipe(gulp.dest(SITE_BUILD_PATH));
-});
-
-gulp.task('build:site:js', function () {
-	browserify('site/site.js')
-		.transform(babelify.configure({
-			plugins: [require('babel-plugin-object-assign')]
-		}))
-		.bundle()
-		.on('error', function (e) {
-			gutil.log('Browserify Error', e);
-		})
-		.pipe(source('site.js'))
-		.pipe(gulp.dest(SITE_BUILD_PATH));
-});
-
-gulp.task('build:site:less', function () {
-	return gulp.src('site/site.less')
-		.pipe(less())
-		.pipe(gulp.dest(SITE_BUILD_PATH));
-});
-
-gulp.task('build:site', ['build:site:files', 'build:site:less', 'build:site:js']);
-
-// Local HTTP server
-gulp.task('site', ['build:site'], function () {
-	connect.server({
-		root: SITE_BUILD_PATH,
-		port: 8000
-	});
 });
 
 // Publish
@@ -96,11 +42,7 @@ gulp.task('publish:tag', function (done) {
 	});
 });
 
-gulp.task('publish:site', ['build:site'], function () {
-	return gulp.src(SITE_BUILD_PATH + '/**/*').pipe(deploy());
-});
-
-gulp.task('release', ['publish:tag', 'publish:npm', 'publish:site']);
+gulp.task('release', ['publish:tag', 'publish:npm']);
 
 // Version
 function _bump (type) {
