@@ -1,0 +1,136 @@
+// 
+// Forms
+// ==============================
+
+
+
+
+// Fixes
+// ------------------------------
+
+input::-webkit-input-placeholder { line-height: normal; }
+
+
+
+
+// Field
+// ------------------------------
+
+// label + control
+
+.FieldLabel {
+	color: @field-label-color;
+	width: 35%;
+}
+
+.FieldControl {
+	position: relative;
+	width: 65%;
+}
+
+// input
+
+.field {
+	.placeholder( @field-placeholder );
+	background: none transparent;
+	border: 0 none;
+	box-shadow: none;
+	color: @field-color;
+	display: inline-block;
+	line-height: 1;
+	margin: 0;
+	min-height: @font-size-base + 3;
+	outline: none;
+	padding: 0;
+	position: relative;
+	width: 100%;
+	z-index: 2;
+
+	-webkit-appearance: none;
+	-webkit-touch-callout: default;
+	-webkit-user-select: auto;
+
+	// one line
+	&.one-line {
+		overflow-x: auto;
+		white-space: nowrap;
+	}
+}
+
+
+
+
+// Select Field
+// ------------------------------
+
+@indicator-arrow-size: 4px;
+@indicator-arrow-gap:  2px;
+
+// style the native select field whilst retaining the default behaviour
+// apply default field styles
+
+.select-field {
+	.field();
+	color: @text-color;
+	font-size: inherit;
+	font-family: @font-family-base;
+	line-height: @line-height-base;
+	outline: none;
+	width: 100%;
+	-webkit-appearance: none;
+	   -moz-appearance: none;
+			appearance: none;
+
+	// Stop FF from showing that dotted outline
+	// this hack makes me feel dirty :(
+	&:-moz-focusring {
+		color: transparent; // hide text
+		text-shadow: 0 0 0 #000; // replace text with a shadow
+	}
+	&:focus + .select-field-indicator {
+		.select-field-indicator-arrow {
+			border-top-color: @gray;
+		}
+	}
+}
+// replicate the dropdown arrows
+.select-field-indicator,
+.select-field-indicator-arrow {
+	bottom: 0;
+	display: inline-block;
+	right: 0;
+	top: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+// hide the default arrow UI
+.select-field-indicator {
+	.border-right-radius( @border-radius-base - 2 );
+	background-color: white;
+	width: 1.5em;
+}
+// add the arrow back
+.select-field-indicator-arrow {
+	top: 50%;
+
+	&:before,
+	&:after {
+		.square(0);
+		border: @indicator-arrow-size solid transparent;
+		content: "";
+		position: absolute;
+		right: @indicator-arrow-size / 2;
+	}
+	&:before {
+		border-bottom-color: currentColor;
+		border-top-width: 0;
+		margin-top: -(@indicator-arrow-size + @indicator-arrow-gap);
+	}
+	&:after {
+		border-top-color: currentColor;
+		border-bottom-width: 0;
+		margin-bottom: -(@indicator-arrow-size + @indicator-arrow-gap);
+	}
+}
+

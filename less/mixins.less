@@ -1,0 +1,51 @@
+// 
+// Mixins
+// ==========================
+
+// Composed
+// --------------------------
+
+@import "mixins/border-radius.less";
+@import "mixins/buttons.less";
+@import "mixins/clearfix.less";
+@import "mixins/flex.less";
+@import "mixins/gradients.less";
+@import "mixins/image.less";
+@import "mixins/resize.less";
+@import "mixins/retina-borders.less";
+@import "mixins/size.less";
+@import "mixins/text.less";
+@import "mixins/vendor-prefixes.less";
+
+// Misc
+// ------------------------------
+
+// ionicons
+
+.ionicon(@color, @content, @size) {
+	.ion();
+	color: @color;
+	font-size: @size;
+
+	&:before { content: @content; }
+}
+.pseudo-ionicon(@color, @content, @size) {
+	.ion();
+	color: @color;
+	content: @content;
+	font-size: @size;
+}
+
+// Components
+// ------------------------------
+
+// switch
+
+.switch-variant(@on-border-color, @on-bg-color) {
+	// the track when the toggle is "on"
+	&.is-on > .Switch__track {
+		border-color: @on-border-color;
+		background-color: @on-bg-color;
+	}
+}
+

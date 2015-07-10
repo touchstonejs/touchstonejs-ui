@@ -1,0 +1,71 @@
+// 
+// Group
+// ==============================
+
+// base
+
+.Group {
+	.retina-1px-border-top-and-bottom( rgba(0,0,0,0.17) );
+	background-color: @group-bg;
+	color: @group-color;
+	display: block;
+	margin-bottom: @gutter-lg;
+
+	// provide a nice gutter between the first group and the header
+	&:first-child {
+		margin-top: @gutter-lg;
+	}
+
+	// when you want the whole group to be tappable
+	&.Tappable-active {
+		.transition( background-color 10ms linear 10ms ); // delay the tap highlight, it may just be a scroll
+		background-color: @item-bg-tap;
+	}
+
+	// transition in and out of tap bg highlight
+	&.Tappable-inactive {
+		.transition( background-color 200ms );
+	}
+}
+
+// group headings
+// sits above the group, giving it a title
+
+.GroupHeader {
+	color: @group-header-color;
+	font-size: 80%;
+	line-height: 1;
+	text-transform: uppercase;
+	
+	// use margin for vertical spacing to take advantage of collapsing
+	margin-bottom: @gutter-base;
+	margin-top: @gutter-lg;
+	padding-left: @padding-base-horizontal;
+	padding-right: @padding-base-horizontal;
+}
+
+// group footer
+// sits below the group, use if the group needs further explanation
+
+.GroupFooter {
+	color: @group-footer-color;
+	font-size: 80%;
+	line-height: 1.1;
+	
+	margin-bottom: @gutter-lg;
+	margin-top: -(@gutter-lg / 2);
+	padding-left: @padding-base-horizontal;
+	padding-right: @padding-base-horizontal;
+}
+
+// body
+
+.GroupBody {
+	line-height: 1.3;
+	padding: @padding-base-vertical @padding-base-horizontal;
+
+	& + & {
+		box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1);
+	}
+}
+

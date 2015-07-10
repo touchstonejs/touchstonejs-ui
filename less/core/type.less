@@ -1,0 +1,153 @@
+// 
+// Type
+// ==============================
+
+// Icons
+// ------------------------------
+
+.ion:before { font-size: @icon-size-base; }
+
+.icon-xs   { font-size: @icon-size-tiny !important; }
+.icon-sm   { font-size: @icon-size-small !important; }
+.icon-md   { font-size: @icon-size-base !important; }
+.icon-lg   { font-size: @icon-size-large !important; }
+.icon-xl   { font-size: @icon-size-huge !important; }
+.icon-xxl  { font-size: @icon-size-massive !important; }
+.icon-xxxl { font-size: @icon-size-gargantuan !important; }
+
+// Elements
+// ------------------------------
+
+p {
+	margin: 0 0 .66em;
+}
+
+// Misc
+// ------------------------------
+
+hr.dashed { border-top-style: dashed; }
+hr.dotted { border-top-style: dotted; }
+
+.text-overflow {
+	.text-overflow(block);
+	// line-height: 1.2; // stop the bottom/top of the text being cropped
+}
+.text-overflow--reverse {
+	.text-overflow(block);
+	// line-height: 1.2; // stop the bottom/top of the text being cropped
+	direction: rtl;
+    text-align: left;
+}
+
+// Lists
+// ------------------------------
+
+.list-unstyled {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	> li {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+// Utilities
+// ------------------------------
+
+// Alignment
+.text-left           { text-align: left !important; }
+.text-right          { text-align: right !important; }
+.text-center         { text-align: center !important; }
+.text-justify        { text-align: justify; }
+.text-nowrap         { white-space: nowrap; }
+
+// Transformation
+.text-lowercase      { text-transform: lowercase; }
+.text-caps,
+.text-uppercase      { text-transform: uppercase; }
+.text-capitalize     { text-transform: capitalize; }
+
+// Weight
+.text-thin    { font-weight: 100; }
+.text-slim    { font-weight: 300; }
+.text-regular { font-weight: 400; }
+.text-medium  { font-weight: @font-weight-bold; }
+.text-bold    { font-weight: 600; }
+
+// Typeface
+.text-monospace { font-family: @font-family-monospace; }
+
+// Transformation
+.text-xs      { font-size: @font-size-xs; }
+.text-sm      { font-size: @font-size-sm; }
+.text-md      { font-size: @font-size-base; }
+.text-lg      { font-size: @font-size-lg; }
+.text-xl      { font-size: @font-size-xl; line-height: 1; }
+.text-xxl     { font-size: @font-size-xxl; line-height: 1; }
+
+// Contextual colors
+
+.text-ghosted {
+	color: @field-placeholder;
+}
+
+// muted
+.text-muted,
+.btn-link.text-muted {
+	color: @gray-light;
+}
+// dim
+.text-dimmed,
+.btn-link.text-dimmed {
+	color: @gray;
+}
+// base
+.text-default,
+.text-base,
+.btn-link.text-base,
+.btn-link.text-default {
+	&,
+	&:hover,
+	&:focus,
+	&:active {
+		color: @text-color !important;
+	}
+}
+
+// danger
+.text-danger,
+.btn-link.text-danger {
+	color: @gray-light;
+
+	&:hover,
+	&:focus {
+		color: @app-danger;
+	}
+}
+
+// error
+.text-error,
+.btn-link.text-error {
+	.text-emphasis-variant(@app-danger);
+}
+
+// other
+.text-primary,
+.btn-link.text-primary {
+	.text-emphasis-variant(@app-primary);
+}
+.text-success,
+.btn-link.text-success {
+	.text-emphasis-variant(@app-success);
+}
+.text-info,
+.btn-link.text-info {
+	.text-emphasis-variant(@app-info);
+}
+.text-warning,
+.btn-link.text-warning {
+	.text-emphasis-variant(@app-warning);
+}
+

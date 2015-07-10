@@ -1,0 +1,92 @@
+// 
+// Alertbar
+// ==============================
+
+
+// base
+
+.Alertbar {
+	.translateZ(0); // stop re-paint when introduced into the DOM
+	.transition( background-color 160ms ); // animate variant if state changed while visible
+	color: white;
+	font-size: @font-size-sm;
+	left: 0;
+	line-height: 1.1;
+	padding: @gutter-sm;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 100%;
+	z-index: @zindex-alertbar;
+}
+
+
+// overlay translucent for pulse
+
+.Alertbar--pulse::after {
+	.animation( pulse 2s linear infinite );
+	background-color: black;
+	bottom: 0;
+	content: "";
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 1;
+}
+
+
+// variants
+
+.Alertbar--danger   { background-color: @app-danger; }
+.Alertbar--default  { background-color: @gray-light; }
+.Alertbar--info     { background-color: @app-info; }
+.Alertbar--primary  { background-color: @app-primary; }
+.Alertbar--success  { background-color: @app-success; }
+.Alertbar--warning  { background-color: @app-warning; }
+
+
+// sit the text above the pulsing background
+
+.Alertbar__inner {
+	position: relative;
+	z-index: 2;
+}
+
+
+
+
+// Animation
+// ------------------------------
+
+// apply animation
+
+.Alertbar-enter {
+	.animation( alertbarEnter 240ms @view-transition-timing-function );
+}
+.Alertbar-leave {
+	.animation( alertbarLeave 240ms @view-transition-timing-function );
+}
+
+// slide up
+
+@-webkit-keyframes alertbarEnter {
+	from {-webkit-transform: translate3d(0, -100%, 0); opacity: .5; }
+	to { -webkit-transform: none; opacity: 1; }
+}
+@keyframes alertbarEnter {
+	from {transform: translate3d(0, -100%, 0); opacity: .5; }
+	to { transform: none; opacity: 1; }
+}
+
+// slide down
+
+@-webkit-keyframes alertbarLeave {
+	from { -webkit-transform: none; opacity: 1; }
+	to { -webkit-transform: translate3d(0, -100%, 0); opacity: .5; }
+}
+@keyframes alertbarLeave {
+	from { transform: none; opacity: 1; }
+	to {transform: translate3d(0, -100%, 0); opacity: .5; }
+}

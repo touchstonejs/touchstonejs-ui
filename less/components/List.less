@@ -1,0 +1,335 @@
+// 
+// List
+// ==============================
+
+
+
+
+// Item
+// ------------------------------
+
+.Item {
+	.display-flex();
+	background: none;
+	border: none;
+	color: @item-color;
+	line-height: 1;
+	outline: none;
+	padding: 0 0 0 @padding-base-horizontal; // create the ios-style gap on the left
+	position: relative;
+	text-align: left;
+	width: 100%;
+	z-index: 1;
+	-webkit-appearance: none;
+
+	// stop changes on various states when developing on desktop
+	&:hover,
+	&:active,
+	&:focus {
+		color: @item-color;
+		text-decoration: none;
+	}
+
+	// add active state
+
+	.Tappable-active > & {
+		.transition( background-color 10ms linear 40ms ); // delay the tap highlight, it may just be a scroll
+		background-color: @item-bg-tap;
+	}
+
+	// transition in and out of tap bg highlight
+
+	.Tappable-inactive > & {
+		.transition( background-color 200ms );
+	}
+}
+
+// provide the little arrow indicating a view will be shown on tap
+
+.Item--has-disclosure-arrow::after {
+	.pseudo-ionicon(#ccc, @ionicon-var-chevron-right, @icon-size-base);
+	.align-items(center);
+	.display-flex();
+	height: 100%;
+	position: absolute;
+	right: @padding-base-horizontal;
+	top: 0;
+}
+
+// align the interior
+
+.Item__inner {
+	.display-flex();
+	.align-items(center);
+	.justify-content(space-between);
+	.retina-1px-border-bottom(@item-divider-color);
+	// border-bottom: 1px solid @item-divider-color;
+	min-height: @item-height;
+	padding: @field-padding-vertical @field-padding-horizontal @field-padding-vertical 0;
+	width: 100%;
+
+	// alternative alignment (applied to the "list-item")
+	.align-children-top > & {
+		.align-items(flex-start);
+	}
+	.align-children-bottom > & {
+		.align-items(flex-end);
+	}
+
+	// hide the last item's border
+	.Item:last-child & {
+		border-bottom: none;
+	}
+
+	// force borders when desired
+	.Item.has-border-bottom & {
+		border-bottom: 1px solid @item-divider-color;
+	}
+	.Item.has-border-top & {
+		border-top: 1px solid @item-divider-color;
+	}
+
+	// add gap between media and content
+	.Item__media + & {
+		margin-left: @field-padding-horizontal;
+	}
+
+	// enforce border when explicitly defined
+	.Item.has-border-bottom & {
+		.retina-1px-border-bottom(@item-divider-color);
+	}
+	.Item.has-border-top & {
+		.retina-1px-border-top(@item-divider-color);
+	}
+}
+
+// wrap item content so text cropping works
+
+.Item__content {
+	.flex(1, 0, 0);
+}
+
+// text
+
+.Item__title {
+	.text-overflow();
+
+	// make room for descenders to stop the being cropped
+	margin-bottom: -1px;
+	padding-bottom: 1px;
+}
+.Item__subtitle {
+	.text-overflow();
+	color: @gray;
+	font-size: 85%;
+	font-weight: 300;
+	
+	// make room for descenders to stop them being cropped
+	margin-bottom: -1px;
+	padding-bottom: 1px;
+}
+
+
+
+
+// Item Notes
+// ------------------------------
+
+
+// base
+
+.Item__note {
+	.display-flex();
+	position: relative;
+	white-space: nowrap;
+
+
+	// create a larger (but hidden) tappable area
+	&:before {
+		bottom: -@field-padding-vertical;
+		content: " ";
+		left: -@field-padding-horizontal;
+		position: absolute;
+		right: -@field-padding-horizontal;
+		top: -@field-padding-vertical;
+	}
+}
+
+
+// variants
+
+.Item__note--default {
+	color: @gray-light;
+	
+	.Item__note__icon {
+		color: #ccc;
+	}
+}
+.Item__note--danger  { color: @app-danger; }
+.Item__note--info    { color: @app-info; }
+.Item__note--primary { color: @app-primary; }
+.Item__note--success { color: @app-success; }
+.Item__note--warning { color: @app-warning; }
+
+// one line
+
+.Item__note__label { white-space: nowrap; }
+
+
+// provide some space for the icon and get the size right
+
+.Item__note__icon {
+	margin-left: (@padding-base-horizontal / 2);
+}
+
+
+
+
+// Item Media
+// ------------------------------
+
+
+// base
+
+.Item__media {
+	.display-flex();
+	.flex-wrap(nowrap);
+	.align-items(center);
+}
+.Item__media--avatar    { .square(@item-avatar-size); }
+.Item__media--icon      { width: @item-icon-size; }
+.Item__media--thumbnail { .square(@item-thumbnail-size); }
+
+
+// icons
+
+.Item__media__icon {
+	.square(@item-icon-size);
+	border-radius: @border-radius-base;
+	display: inline-block;
+	line-height: @item-icon-size;
+	text-align: center;
+	vertical-align: middle;
+
+	// actual icon
+
+	&:before {
+		.display-flex();
+		.align-items(center);
+		.justify-content(center);
+		font-size: @icon-size-large;
+		height: 100%;
+	}
+
+	// align left
+	&.left {
+		left: @padding-base-horizontal;
+
+		&.flush {
+			left: 0;			
+		}
+	}
+	// align right
+	&.right {
+		right: @padding-base-horizontal;
+
+		&.flush {
+			right: 0;			
+		}
+	}
+
+	// add a box around the icon
+	&.rounded {
+		border-radius: @border-radius-base;
+		background-color: @body-bg;
+	}
+}
+
+// icon variants
+
+.Item__media__icon.primary-inverted {
+	background-color: @app-primary;
+	color: white;
+}
+.Item__media__icon.primary {
+	color: @app-primary;
+}
+.Item__media__icon.default {
+	background-color: @body-bg;
+	color: @text-color;
+}
+
+// loading
+
+.Item__media__icon.ion-load-a:before,
+.Item__media__icon.ion-load-b:before,
+.Item__media__icon.ion-load-c:before,
+.Item__media__icon.ion-load-d:before {
+	.animation( spin 1s linear infinite );
+}
+
+// Avatars
+// ------------------------------
+
+.Item__media__avatar {
+	.square(@item-avatar-size);
+	.translateY(-50%);
+	background-color: mix(white, black, 70%);
+	border-radius: 50%;
+	color: white;
+	display: inline-block;
+	font-size: @icon-size-large;
+	line-height: @item-avatar-size;
+	left: @padding-base-horizontal;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	vertical-align: middle;
+
+	> img {
+		.square(100%);
+		border-radius: 50%;
+		display: block;
+		height: auto;
+	}
+}
+
+// Thumbnails
+// ------------------------------
+
+.Item__media__thumbnail {
+	.square(@item-thumbnail-size);
+	margin-top: @padding-base-vertical;
+
+	> img {
+		border-radius: @border-radius-base;
+		display: block;
+		height: auto;
+		max-width: 100%;
+	}
+}
+
+// Headers
+// ------------------------------
+
+.ListHeader {
+	.retina-1px-border-top-and-bottom( @item-divider-color );
+	background-color: @body-bg;
+	color: @list-header-color;
+	display: block;
+	font-size: @font-size-xs;
+	font-weight: @font-weight-bold;
+	line-height: 1.1;
+	margin: 0;
+	padding: (@padding-base-vertical / 2) @padding-base-horizontal;
+	position: relative; // fallback
+	text-transform: uppercase;
+	z-index: 2;
+
+	// sticky option
+	&.sticky {
+		position: -webkit-sticky;
+		top: 0;
+	}
+}
+

@@ -1,0 +1,28 @@
+{
+  "name": "touchstonejs",
+  "version": "0.4.2",
+  "homepage": "https://github.com/touchstonejs/touchstonejs",
+  "authors": [
+    "Jed Watson"
+  ],
+  "description": "React.js UI components for the TouchstoneJS platform http://touchstonejs.io",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "touchstone",
+    "touchstonejs",
+    "ui",
+    "react",
+    "react-component",
+    "mobile",
+    "hybrid"
+  ],
+  "license": "MIT",
+  "ignore": [
+    ".editorconfig",
+    ".gitignore",
+    "package.json",
+    "site"
+  ]
+}

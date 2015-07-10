@@ -1,0 +1,140 @@
+//
+// Popup
+// ------------------------------
+
+
+
+
+// Dialog
+// ------------------------------
+
+.Popup-dialog {
+	background-color: fade(white, 95%);
+	border-radius: @border-radius-large;
+	left: 50%;
+	margin: -60px 0 0 -60px;
+	padding: 15px;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	width: 120px;
+	z-index: @zindex-popup;
+
+	&.default {
+		.translateY(-50%);
+		margin-left: -135px;
+		left: 50%;
+		top: 50%;
+		width: 270px;
+	}
+}
+.Popup-dialog-enter {
+	.animation-name( popupDialogEnter );
+	.animation-duration( 280ms );
+	.animation-timing-function( cubic-bezier(0.680, -0.550, 0.265, 1.550) );
+}
+.Popup-dialog-leave {
+	.animation-duration( 140ms );
+	.animation-name( popupDialogLeave );
+}
+
+
+
+
+// Backgdrop
+// ------------------------------
+
+.Popup-backdrop {
+	.animation-duration( 140ms );
+	background-color: rgba(0, 0, 0, 0.33);
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: @zindex-popup-backdrop;
+}
+.Popup-background-enter {
+	.animation-name( popupBackdropEnter );
+}
+.Popup-background-leave {
+	.animation-delay( 240ms );
+	.animation-name( popupBackdropLeave );
+}
+
+
+
+
+// Popup Icon
+// ------------------------------
+
+.PopupIcon {
+	.square( 46px );
+	display: inline-block;
+	line-height: 46px;
+	margin-bottom: 5px;
+
+	&:before {
+		font-size: 46px;
+	}
+
+	&.muted { color: @gray-light; }
+	&.primary { color: @app-primary; }
+	&.success { color: @app-success; }
+	&.warning { color: @app-warning; }
+	&.danger  { color: @app-danger; }
+}
+
+// loading
+
+.PopupIcon.is-spinning {
+	.animation( spin 1s linear infinite );
+}
+
+
+
+// Animation
+// --------------------
+
+
+// dialog
+
+@-webkit-keyframes popupDialogEnter {
+	from { opacity: 0; -webkit-transform: scale( .8 ); }
+	to { opacity: 1; -webkit-transform: scale( 1 ); }
+}
+@keyframes popupDialogEnter {
+	from { opacity: 0; transform: scale( .8 ); }
+	to { opacity: 1; transform: scale( 1 ); }
+}
+
+@-webkit-keyframes popupDialogLeave {
+	from { opacity: 1; -webkit-transform: scale( 1 ); }
+	to { opacity: 0; -webkit-transform: scale( .8 ); }
+}
+@keyframes popupDialogLeave {
+	from { opacity: 1; transform: scale( 1 ); }
+	to { opacity: 0; transform: scale( .8 ); }
+}
+
+
+// backdrop
+
+@-webkit-keyframes popupBackdropEnter {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+@keyframes popupBackdropEnter {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@-webkit-keyframes popupBackdropLeave {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+@keyframes popupBackdropLeave {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
